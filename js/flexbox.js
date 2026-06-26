@@ -9,20 +9,22 @@ const productos = [
 
 const contenedor = document.querySelector(".contenedor-flex");
 
+// renderiza las cajas en pantalla
 function render() {
     contenedor.innerHTML = "";
 
-    productos.forEach((p) => {
+    productos.forEach((item) => {
         const div = document.createElement("div");
         div.classList.add("caja");
-        div.textContent = p;
+        div.textContent = item;
         contenedor.appendChild(div);
     });
 }
 
+// función inicial
 render();
 
-// interacción simple: mezclar orden
+// botón: mezclar cajas
 function mezclar() {
     productos.sort(() => Math.random() - 0.5);
     render();
