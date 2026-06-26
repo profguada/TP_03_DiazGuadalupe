@@ -1,20 +1,40 @@
-const personas = [
-    { nombre: "Juan", edad: 25 },
-    { nombre: "María", edad: 30 },
-    { nombre: "Carlos", edad: 22 },
-    { nombre: "Lucía", edad: 28 }
-];
+const form = document.getElementById("form-persona");
+const tabla = document.querySelector("#tabla-personas tbody");
 
-const contenedor = document.getElementById("lista-personas");
+function calcularIMC(peso, altura) {
+    return (peso / (altura * altura)).toFixed(2);
+}
 
-personas.forEach(persona => {
-    const div = document.createElement("div");
-    div.classList.add("persona");
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-    div.innerHTML = `
-        <h3>${persona.nombre}</h3>
-        <p>Edad: ${persona.edad}</p>
+    const nombre = document.getElementById("nombre").value;
+    const apellido = document.getElementById("apellido").value;
+    const edad = document.getElementById("edad").value;
+    const altura = parseFloat(document.getElementById("altura").value);
+    const peso = parseFloat(document.getElementById("peso").value);
+
+    const imc = calcularIMC(peso, altura);
+
+    const fila = document.createElement("tr");
+
+    fila.innerHTML = `
+        <td>${nombre}</td>
+        <td>${apellido}</td>
+        <td>${edad}</td>
+        <td>${altura}</td>
+        <td>${peso}</td>
+        <td>${imc}</td>
+        <td><button class="eliminar">Eliminar</button></td>
     `;
 
-    contenedor.appendChild(div);
+    tabla.appendChild(fila);
+
+    form.reset();
+});
+
+tabla.addEventListener("click", function (e) {
+    if (e.target.classList.contains("eliminar")) {
+        e.target.parentElement.parentElement.remove();
+    }
 });

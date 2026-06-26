@@ -72,3 +72,30 @@ main {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     text-align: center;
 }
+
+form {
+    margin: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+input {
+    padding: 8px;
+}
+
+button {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+td, th {
+    padding: 10px;
+}

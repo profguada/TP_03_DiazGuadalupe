@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Personas</title>
+</head>
+
+<body>
+
+<header>
+    <h1>Ejercicio 3 - React</h1>
+</header>
+
+<div id="root"></div>
+
+<!-- React CDN -->
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+
+function App() {
+
+    const [personas, setPersonas] = React.useState([]);
+
+    const [form, setForm] = React.useState({
+        nombre: "",
+        apellido: "",
+        edad: "",
+        altura: "",
+        peso: ""
+    });
+
+    function calcularIMC(peso, altura) {
+        return (peso / (altura * altura)).toFixed(2);
+    }
+
+    function handleChange(e) {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    function agregarPersona() {
+        const nueva = {
+            ...form,
+            imc: calcularIMC(parseFloat(form.peso), parseFloat(form.altura))
+        };
+
+        setPersonas([...personas, nueva]);
+
+        setForm({
+            nombre: "",
+            apellido: "",
+            edad: "",
+            altura: "",
+            peso: ""
+        });
+    }
+
+    function eliminar(index) {
+        const copia = [...personas];
+        copia.splice(index, 1);
+        setPersonas(copia);
+    }
+
+    return (
+        <div style={{ textAlign: "center" }}>
+
+            <h2>Formulario</h2>
+
+            <input name="nombre" placeholder="Nombre" value={form.nombre} onChange={handleChange} />
+            <input name="apellido" placeholder="Apellido" value={form.apellido} onChange={handleChange} />
+            <input name="edad" placeholder="Edad" value={form.edad} onChange={handleChange} />
+            <input name="altura" placeholder="Altura" value={form.altura} onChange={handleChange} />
+            <input name="peso" placeholder="Peso" value={form.peso} onChange={handleChange} />
+
+            <br /><br />
+
+            <button onClick={agregarPersona}>Agregar</button>
+
+            <h2>Tabla</h2>
+
+            <table border="1" style={{ margin: "auto" }}>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Edad</th>
+                        <th>Altura</th>
+                        <th>Peso</th>
+                        <th>IMC</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {personas.map((p, i) => (
+                        <tr key={i}>
+                            <td>{p.nombre}</td>
+                            <td>{p.apellido}</td>
+                            <td>{p.edad}</td>
+                            <td>{p.altura}</td>
+                            <td>{p.peso}</td>
+                            <td>{p.imc}</td>
+                            <td>
+                                <button onClick={() => eliminar(i)}>Eliminar</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+
+        </div>
+    );
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+
+</script>
+
+</body>
+</html>

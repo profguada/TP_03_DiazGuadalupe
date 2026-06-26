@@ -10,19 +10,47 @@
 
 <body>
 
-    <header>
-        <h1>Ejercicio 2 - Personas</h1>
-    </header>
+<header>
+    <h1>Ejercicio 2 - Personas</h1>
+</header>
 
-    <main>
+<main>
 
-        <h2>Listado de Personas</h2>
+    <h2>Formulario de personas</h2>
 
-        <div id="lista-personas"></div>
+    <form id="form-persona">
 
-    </main>
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="apellido" placeholder="Apellido" required>
+        <input type="number" id="edad" placeholder="Edad" required>
+        <input type="number" id="altura" placeholder="Altura (m)" step="0.01" required>
+        <input type="number" id="peso" placeholder="Peso (kg)" step="0.1" required>
 
-    <script src="js/personas.js"></script>
+        <button type="submit">Agregar</button>
+
+    </form>
+
+    <h2>Tabla de personas</h2>
+
+    <table border="1" id="tabla-personas">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Altura</th>
+                <th>Peso</th>
+                <th>IMC</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+
+        <tbody></tbody>
+    </table>
+
+</main>
+
+<script src="js/personas.js"></script>
 
 </body>
 </html>
